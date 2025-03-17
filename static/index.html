@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David's problem solver</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Sayo's Sign Location Placement</h1>
+            <p>Enter numbers and a target result to find valid sign combinations.</p>
+        </header>
+
+        <main class="main">
+            <form id="solverForm" class="form">
+                <div class="form-group">
+                    <label for="numbers">Numbers (3 to 7 digits, separated by spaces):</label>
+                    <input type="text" id="numbers" name="numbers" required pattern="\d{1,2}(\s\d{1,2}){2,6}">
+                </div>
+                <div class="form-group">
+                    <label for="target">Target Result:</label>
+                    <input type="number" id="target" name="target" required>
+                </div>
+                <button type="submit" class="btn">Solve</button>
+            </form>
+
+            <section class="results">
+                <h2>Results:</h2>
+                <pre id="results" class="results-output"></pre>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2024 Augustten</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('solverForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const numbers = document.getElementById('numbers').value;
+            const target = document.getElementById('target').value;
+
+            // Validate input
+            if (!numbers.match(/^\d{1,2}(\s\d{1,2}){2,6}$/)) {
+                alert("Please enter 3 to 7 numbers, each with 1 or 2 digits, separated by spaces.");
+                return;
+            }
+
+            // Send input to backend
+            const response = await fetch(`http://localhost:8080/solve?numbers=${numbers}&target=${target}`);
+            const result = await response.text();
+            document.getElementById('results').textContent = result;
+        });
+    </script>
+</body>
+
+</html>
