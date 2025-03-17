@@ -36,7 +36,7 @@
         </main>
 
         <footer class="footer">
-            <p>© 2024 Augustten</p>
+            <p>© 2025 Augustten</p>
         </footer>
     </div>
 
@@ -53,7 +53,7 @@
             }
 
             // Send input to backend
-            const response = await fetch(`forsayo.fly.dev/solve?numbers=${numbers}&target=${target}`);
+            const response = await fetch(`http://forsayo.fly.dev/solve?numbers=${numbers}&target=${target}`);
             const result = await response.text();
             document.getElementById('results').textContent = result;
         });
