@@ -53,7 +53,7 @@
             }
 
             // Send input to backend
-            const response = await fetch(`forsayo-production.up.railway.app/solve?numbers=${numbers}&target=${target}`);
+            const response = await fetch(`http://localhost:8080/solve?numbers=${numbers}&target=${target}`);
             const result = await response.text();
             document.getElementById('results').textContent = result;
         });
