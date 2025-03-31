@@ -12,14 +12,14 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>Sayo's Sign Location Placement</h1>
-            <p>Enter numbers and a target result to find valid sign combinations.</p>
+            <h1>Numerical Reasoning Test Solver</h1>
+            <p>Enter the set of numbers and a target result to find valid mathematical sign combinations.</p>
         </header>
 
         <main class="main">
             <form id="solverForm" class="form">
                 <div class="form-group">
-                    <label for="numbers">Numbers (3 to 7 digits, separated by spaces):</label>
+                    <label for="numbers">Set Of Numbers (3 to 7 integers, separated by a single space):</label>
                     <input type="text" id="numbers" name="numbers" required pattern="\d{1,2}(\s\d{1,2}){2,6}">
                 </div>
                 <div class="form-group">
@@ -46,13 +46,11 @@
             const numbers = document.getElementById('numbers').value;
             const target = document.getElementById('target').value;
 
-            // Validate input
             if (!numbers.match(/^\d{1,2}(\s\d{1,2}){2,6}$/)) {
                 alert("Please enter 3 to 7 numbers, each with 1 or 2 digits, separated by spaces.");
                 return;
             }
 
-            // Send input to backend
             const response = await fetch(`https://forsayo.fly.dev/solve?numbers=${numbers}&target=${target}`);
             const result = await response.text();
             document.getElementById('results').textContent = result;
